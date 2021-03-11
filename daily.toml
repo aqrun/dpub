@@ -1,0 +1,11 @@
+# 发布配置文件
+
+[apple]
+dev_tag = "feat/user-login"
+daily_tag = "daily/0.1.2"
+project_root = "E:\\workspace\\apple"
+
+[orange]
+dev_tag = "feat/dashboard"
+daily_tag = "daily/1.2.100"
+project_root = "E:\\workspace\\orange"
