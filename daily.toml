@@ -2,8 +2,8 @@
 
 [apple]
 dev_tag = "feat/user-login"
-daily_tag = "daily/0.1.2"
-project_root = "E:\\workspace\\apple"
+daily_tag = "daily/0.1.1"
+project_root = "E:\\workspace\\test\\apple"
 
 [orange]
 dev_tag = "feat/dashboard"

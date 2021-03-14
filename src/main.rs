@@ -3,7 +3,7 @@ extern crate clap;
 extern crate dpub;
 
 use clap::{App, Arg};
-use dpub::Config;
+use dpub::{Config, App as PubApp};
 
 const VERSION: &str = concat!("v", crate_version!());
 
@@ -31,11 +31,19 @@ fn main() {
   let config_file = matches.value_of("config")
     .unwrap_or("daily.toml");
   // 获取参数指定的项目名称
-  let project_name = matches.value_of("project").unwrap();
-
-  // 生成配置参数
-  let config = Config::from_dist(config_file, &project_name)
+  let project_name = matches.value_of("project")
     .unwrap();
 
-  println!("参数：{:?}", config);
+  // 生成配置参数
+  let config = Config::from_dist(
+    config_file,
+    &project_name
+  ).unwrap();
+
+  let pub_app = PubApp::new(&config);
+
+  match pub_app.execute() {
+    Ok(msg) => println!("Success: {}", msg),
+    Err(e) => println!("Error: {:?}", e),
+  }
 }

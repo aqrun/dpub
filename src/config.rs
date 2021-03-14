@@ -3,7 +3,6 @@ use std::collections::HashMap;
 use std::path::Path;
 use toml;
 
-
 /// 项目配置信息
 #[derive(Debug, Clone, PartialEq)]
 pub struct Config {
@@ -20,18 +19,24 @@ pub struct Config {
 impl Config {
 
   /// 从指定路径的文件读取配置信息
-  pub fn from_dist<P: AsRef<Path>>(
+  pub fn from_dist<P: AsRef<Path>> (
+    // 配置文件绝对路径
     config_file: P,
+    // 项目名称
     project_name: &str
   ) -> Result<Config, ()> {
     // 读取配置文件内容
-    let c = std::fs::read_to_string(&config_file).unwrap();
+    let c = std::fs::read_to_string(
+      &config_file
+    ).unwrap();
 
-    // 将内容转为 指定类型的哈希Map { string: ProjectConfig }
+    // 将内容转为 指定类型的
+    // HashMap { string: ProjectConfig }
     let config: HashMap<String, ProjectConfig> =
         toml::from_str(&c).unwrap();
 
-    // 获取 hashMap中键为 cloud-monitor 的 DefConfig 配置项
+    // 获取 hashMap中键为 cloud-monitor 
+    // 的 DefConfig 配置项
     let project_config = 
         config.get(project_name).unwrap();
   
@@ -49,7 +54,10 @@ impl Config {
 }
 
 /// 项目配置参数 和 daily.toml 对应
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(
+  Debug, Clone, PartialEq,
+  Serialize, Deserialize
+)]
 pub struct ProjectConfig {
   /// 开发分支
   pub dev_tag: Option<String>,
